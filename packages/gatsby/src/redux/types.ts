@@ -101,11 +101,11 @@ export interface IGatsbyJobContent {
 }
 
 export interface IGatsbyJobV2 {
-  job?: IGatsbyJobContent
-  plugin?: IGatsbyPlugin
+  job: IGatsbyJobContent
+  plugin: IGatsbyPlugin
   traceId?: string
-  result?: string[]
-  inputPaths?: string[]
+  result: string[]
+  inputPaths: string[]
 }
 
 export interface IGatsbyState {

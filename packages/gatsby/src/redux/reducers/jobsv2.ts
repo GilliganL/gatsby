@@ -11,12 +11,16 @@ export const jobsV2Reducer = (
     case `CREATE_JOB_V2`: {
       const { job, plugin } = action.payload
 
-      if (!job) return state
+      if (!job) {
+        throw new Error(
+          `If you encounter this error, it's probably a Gatsby internal bug. Please open an issue reporting us this.`
+        )
+      }
 
       state.incomplete.set(job.contentDigest, {
         job,
         plugin,
-      })
+      } as IGatsbyJobV2)
 
       return state
     }
@@ -26,7 +30,9 @@ export const jobsV2Reducer = (
       const { job } = state.incomplete.get(jobContentDigest) as IGatsbyJobV2
 
       if (!job) {
-        return state
+        throw new Error(
+          `If you encounter this error, it's probably a Gatsby internal bug. Please open an issue reporting us this.`
+        )
       }
 
       state.incomplete.delete(job.contentDigest)
@@ -35,7 +41,7 @@ export const jobsV2Reducer = (
       state.complete.set(job.contentDigest, {
         result,
         inputPaths: job.inputPaths,
-      })
+      } as IGatsbyJobV2)
 
       return state
     }
